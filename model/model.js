@@ -52,4 +52,20 @@ var TagsSchema = Schema({
 
 const Tag = mongoose.model("Tag", TagsSchema);
 
-module.exports = { Users, Blog, Category, Tag };
+// 评论
+var CommentSchema = Schema({
+    post: { type: Schema.Types.ObjectId, ref: "Blog" },
+    user: String,
+    content: String,
+    date: { type: Date, default: Date.now },
+    replay: [{
+        fromuser: String,
+        touser: String,
+        content: String,
+        date: { type: Date, default: Date.now },
+    }]
+})
+
+const Comments = mongoose.model("Comments", CommentSchema);
+
+module.exports = { Users, Blog, Category, Tag, Comments };

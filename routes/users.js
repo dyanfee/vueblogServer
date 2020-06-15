@@ -5,7 +5,7 @@ var router = express.Router();
 var model = require("../model/model");
 var bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
-var check = require("../controller/check")
+var check = require("../middleware/check")
 
 
 // 查询所有用户

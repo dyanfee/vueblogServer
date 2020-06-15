@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 
 var userRouter = require('./routes/users');
 var postRouter = require('./routes/posts');
+var commentRouter = require('./routes/comments');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/', userRouter);
 app.use('/api/', postRouter);
+app.use('/api/', commentRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

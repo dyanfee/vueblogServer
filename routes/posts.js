@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var model = require("../model/model")
-var { checkToken } = require("../controller/check")
+var { checkToken } = require("../middleware/check")
+var { getComments } = require("../middleware/comment")
 
 var {
     saveCate, saveTags, savePost, poststat, catestat, tagstat, removeCategory,
     removeTags, removePost, eidtPost, findCates, findTags, findPost, errSend
-} = require("../controller/post")
+} = require("../middleware/post")
 
 // 保存文章
 router.post("/post", checkToken, savePost, saveTags, saveCate, function (req, res) {
@@ -53,8 +54,8 @@ router.get("/poststat", poststat, catestat, tagstat, function (req, res) {
 })
 
 // 获取某篇文章
-router.get("/post/:id", function (req, res) {
-    model.Blog.findOne({ _id: req.params.id }, function (err, docs) {
+router.get("/post", getComments, function (req, res) {
+    model.Blog.findOne({ _id: req.query.id }, function (err, docs) {
         if (err) {
             return res.send({
                 code: -200,
@@ -63,10 +64,15 @@ router.get("/post/:id", function (req, res) {
         }
         res.send({
             code: 200,
-            post: docs
+            post: docs,
+            comments: req.comments
         })
     })
 })
+
+
+
+
 
 
 
