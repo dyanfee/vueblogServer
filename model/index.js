@@ -21,6 +21,8 @@ db.on('connected', function () {
  * 连接异常
  */
 db.on('error', function (err) {
+    console.log("DB_URL:" + DB_URL);
+
     console.log('Mongoose connection error: ' + err);
 });
 

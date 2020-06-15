@@ -5,8 +5,7 @@ const getComments = function (req, res, next) {
     if (req.query.comments && req.query.id)
         model.Comments.find({ post: req.query.id }, function (err, docs) {
             req.comments = docs
-            console.log(docs);
-            
+            // console.log(docs);
             next()
         })
     else
