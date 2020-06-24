@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production pm2 start ./bin/www --node-args='--harmony' --name 'server'"
   },
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",

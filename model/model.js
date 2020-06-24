@@ -1,7 +1,7 @@
 
 require("../model");
 var mongoose = require("mongoose")
-var bcrypt = require("bcrypt")
+var bcrypt = require("bcryptjs")
 var Schema = mongoose.Schema;
 
 var UsersSchema = Schema({
@@ -57,6 +57,7 @@ var CommentSchema = Schema({
     post: { type: Schema.Types.ObjectId, ref: "Blog" },
     user: String,
     content: String,
+    fanv: { type: Number, default: 0 },
     date: { type: Date, default: Date.now },
     replay: [{
         fromuser: String,

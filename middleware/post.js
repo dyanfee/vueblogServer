@@ -1,9 +1,10 @@
 var model = require("../model/model")
 
 
-var saveCb = function (response, err, docs) {
+var saveCb = function (err, doc) {
     if (err)
-        return errSend(response, "保存失败");
+        return console.log(doc, "保存失败");
+
 }
 var errSend = function (response, message, code) {
     if (!code) code = -200;
@@ -12,6 +13,7 @@ var errSend = function (response, message, code) {
         message
     })
 }
+
 
 /** 加入文章分类 */
 var saveCate = function (req, res, next) {
@@ -33,8 +35,10 @@ var saveCate = function (req, res, next) {
                 docs.posts.push(req.post._id);
                 docs.save(saveCb)
             }
+            next()
         })
-    next()
+    else
+        next()
 }
 /** 加入标签 */
 var saveTags = function (req, res, next) {
@@ -57,10 +61,12 @@ var saveTags = function (req, res, next) {
                     docs.posts.push(req.post._id);
                     docs.save(saveCb)
                 }
+                next()
             })
         }
     }
-    next()
+    else
+        next()
 }
 const savePost = function (req, res, next) {
     // TODO 验证用户

@@ -3,7 +3,7 @@ require("dotenv").config()
 var express = require('express');
 var router = express.Router();
 var model = require("../model/model");
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 var check = require("../middleware/check")
 
@@ -20,16 +20,16 @@ router.get("/users", function (req, res) {
 })
 
 // 创建用户 注册
-// router.post("/register", function (req, res) {
-//     new model.Users(req.body).save(function (err, user) {
-//         if (err) {
-//             // TODO捕获错误原因
-//             res.status(422).send("用户创建失败！")
-//             return
-//         }
-//         res.send(user)
-//     })
-// })
+router.post("/register", function (req, res) {
+    new model.Users(req.body).save(function (err, user) {
+        if (err) {
+            // TODO捕获错误原因
+            res.status(422).send("用户创建失败！")
+            return
+        }
+        res.send(user)
+    })
+})
 
 // 用户登录
 router.post("/login", async function (req, res) {
